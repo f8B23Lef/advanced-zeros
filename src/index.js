@@ -1,12 +1,12 @@
 module.exports = function getZerosCount(number, base) {
 
-  var primeFactors = decomposePrimeFactors(base);
-  var zeros = -1;
+  const primeFactors = decomposePrimeFactors(base);
+  let zeros = -1;
 
-  for(var i = 0; i < primeFactors.length; i++) {
-    var base = primeFactors[i][0];
-    var exp = primeFactors[i][1];
-    var countFactor = Math.trunc(calcCountPrimeFactor(number, base) / exp);
+  for(let i = 0, len = primeFactors.length; i < len; i++) {
+    const base = primeFactors[i][0];
+    const exp = primeFactors[i][1];
+    const countFactor = Math.trunc(calcCountPrimeFactor(number, base) / exp);
     if(zeros == -1 || countFactor < zeros) {
       zeros = countFactor;
     }
@@ -17,9 +17,9 @@ module.exports = function getZerosCount(number, base) {
   
 function decomposePrimeFactors(num) {
     
-  var primeFactors = [];  
+  const primeFactors = [];  
     
-  for(var i = 2; i <= num; i++) {
+  for(let i = 2; i <= num; i++) {
     while(num % i === 0) {
       primeFactors.push(i);
       num = num / i;
@@ -31,11 +31,11 @@ function decomposePrimeFactors(num) {
   
 function formPowerFactorPairs(primeFactors) {
   
-  var powerFactors = [];
-  var prevFactor = primeFactors[0];
-  var count = 1;
+  const powerFactors = [];
+  let prevFactor = primeFactors[0];
+  let count = 1;
     
-  for(var i = 1; i < primeFactors.length; i++) {
+  for(let i = 1, len = primeFactors.length; i < len; i++) {
   
     if(primeFactors[i] === prevFactor) {
       count++;
@@ -54,9 +54,9 @@ function formPowerFactorPairs(primeFactors) {
 
 function calcCountPrimeFactor(number, primeFactor) {
 
-  var countFactor = 0;
+  let countFactor = 0;
   
-  for (var i = primeFactor; i <= number; i *= primeFactor) {
+  for (let i = primeFactor; i <= number; i *= primeFactor) {
     countFactor += Math.trunc(number / i); 
   }
 
